@@ -9,7 +9,7 @@ public class BoardTest {
 
     @Test
     public void testGrid() {
-        Board board = new Board();
+        Board board = new Board(3);
         assertThat(board.getGrid()[0][0], is(-1));
     }
 }

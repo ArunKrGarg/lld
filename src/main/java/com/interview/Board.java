@@ -1,18 +1,36 @@
 package com.interview;
 
 public class Board {
-    int[][] grid = new int[3][3];
+    private final int SIZE;
+    private final int[][] grid;
+    Board(int size){
+        SIZE = size;
+        grid = new int[SIZE][SIZE];
+        init();
+    }
+
+    private void init(){
+        for(int i = 0; i < SIZE; i++) {
+            for(int j = 0; j < SIZE; j++) {
+                grid[i][j] = -1;
+            }
+        }
+    }
 
     public int[][] getGrid() {
         return grid;
     }
 
-    public boolean isFinished() {
-        return false;
+    public int getSize() {
+        return SIZE;
     }
 
-    public int getWinner() {
-        return -1;
+    public void print() {
+        for(int i = 0; i < SIZE; i++) {
+            for(int j = 0; j < SIZE; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
-
 }

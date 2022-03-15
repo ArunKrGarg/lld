@@ -1,28 +1,29 @@
 package com.interview;
 
 
+import com.interview.exceptions.WrongMoveException;
+
 public class Main {
 
     public static void main(String[] args) {
 	    TicTacToe ticTacToe = new TicTacToe();
-        init(ticTacToe);
+        init(ticTacToe, 3);
 
-        while(!ticTacToe.getBoard().isFinished()) {
-            ticTacToe.step();
-        }
-
-        if(ticTacToe.getBoard().getWinner() > -1) {
-            System.out.println("Winner is " + (ticTacToe.getBoard().getWinner() + 1));
-        }
-    }
-
-    private static void init(TicTacToe ticTacToe) {
-        Board board = new Board();
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 3; j++) {
-                board.getGrid()[i][j] = -1;
+        while(!ticTacToe.finished) {
+            try {
+                ticTacToe.move();
+            } catch (WrongMoveException e) {
+                System.out.println("Please try again.");
+                continue;
             }
         }
+
+        ticTacToe.getBoard().print();
+        System.out.println("Game Finished!!\nWinner is " + (ticTacToe.getWinner() + 1));
+    }
+
+    private static void init(TicTacToe ticTacToe, int size) {
+        Board board = new Board(size);
         ticTacToe.init(board);
     }
 }
